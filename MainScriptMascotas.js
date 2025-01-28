@@ -1,4 +1,4 @@
-var indiceFoto = 0, Nombre = "", tipoMascota = "", datosRecogidos = false;
+var indiceFoto = 0, Nombre = "", tipoMascota = "", datosRecogidos = false, mascotaCreada = null;
 window.onload = function () {
     var selMascota = document.createElement("select");
     selMascota.id = "selMascota";
@@ -40,84 +40,129 @@ window.onload = function () {
 
     // setInterval(ponerMascota, 500);
     document.getElementById("btnAceptar").addEventListener("click", ponerMascota);
-    document.getElementById("btnAceptar").addEventListener("click", function(){setInterval(ponerMascota, 500)});
-    document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
-    
+    document.getElementById("btnAceptar").addEventListener("click", function () { setInterval(ponerMascota, 500) });
+    // document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
 
+
+
+
+
+
+
+    var btnJugar = document.getElementById("botonJugar");
+    btnJugar.addEventListener("click", quitarHambre);
+
+}
+
+
+function quitarHambre() {
+    if (mascotaCreada != null) {
+        mascotaCreada.descenderHambre();
+        ponerRangos();
+    }
 }
 
 function ponerMascota() {
-
-    if(Nombre == ""){
-        Nombre = document.getElementById("NombreTB").value;
-    }
-
-    if(tipoMascota == ""){
-        tipoMascota = document.getElementById("selMascota").value;
-    }
-
-    if (tipoMascota == "perro") {
-
-
-        const Bartolo = new Perro(Nombre);
-        document.getElementById("fotoMascota").src = Bartolo.fotosPerro[indiceFoto];
-        document.getElementById("fotoMascota").style = "width: 230px; height: 300px; top: 50px; left: 50px;";
-
-        indiceFoto = (indiceFoto + 1) % Bartolo.fotosPerro.length;
-
-    } else if (tipoMascota == "gato") {
-
-        const Michi = new Gato(Nombre);
-        document.getElementById("fotoMascota").src = Michi.fotosGato[indiceFoto];
-        document.getElementById("fotoMascota").style = "width: 300px; height: 300px; top: 50px; left: 50px;";
-
-        indiceFoto = (indiceFoto + 1) % Michi.fotosGato.length;
-
-    } else if (tipoMascota == "conejo") {
-
-        const Bolita = new Conejo(Nombre);
-        document.getElementById("fotoMascota").src = Bolita.fotosConejo[indiceFoto];
-        document.getElementById("fotoMascota").style = "width: 220px; height: 300px; top: 50px; left: 50px;";
-
-        indiceFoto = (indiceFoto + 1) % Bolita.fotosConejo.length;
-
-    }
-
-    if(datosRecogidos == false){
-        document.getElementById("nombreMascota").innerText = Nombre;
     
-        document.getElementById("contenedor").removeChild(document.getElementById("selMascota"));
-        document.getElementById("contenedor").removeChild(document.getElementById("NombreTB"));
-        document.getElementById("contenedor").removeChild(document.getElementById("btnAceptar"));
-        datosRecogidos = true;
+    if (mascotaCreada != null) { // Si ya se ha creado una mascota, no se puede crear otra
+        // ya hay mascota creada
+        
+        // hacemos que se vaya moviendo la foto
+        if (tipoMascota == "perro") {
+            document.getElementById("fotoMascota").src = mascotaCreada.fotosPerro[indiceFoto];
+            indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosPerro.length;
+        } else if (tipoMascota == "gato") {
+            document.getElementById("fotoMascota").src = mascotaCreada.fotosGato[indiceFoto];
+            indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosGato.length;
+        } else if (tipoMascota == "conejo") {
+            document.getElementById("fotoMascota").src = Bolita.fotosConejo[indiceFoto];
+            indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosConejo.length;
+        }
+        
+        
+        
+        
+    } else {
+
+
+        Nombre = document.getElementById("NombreTB").value;
+        tipoMascota = document.getElementById("selMascota").value;
+        // creamos la mascota
+        if (tipoMascota == "perro") {
+
+
+            const Bartolo = new Perro(Nombre);
+            document.getElementById("fotoMascota").src = Bartolo.fotosPerro[indiceFoto];
+            document.getElementById("fotoMascota").style = "width: 230px; height: 300px; top: 50px; left: 50px;";
+
+            // indiceFoto = (indiceFoto + 1) % Bartolo.fotosPerro.length;
+
+            mascotaCreada = Bartolo;
+
+        } else if (tipoMascota == "gato") {
+
+            const Michi = new Gato(Nombre);
+            document.getElementById("fotoMascota").src = Michi.fotosGato[indiceFoto];
+            document.getElementById("fotoMascota").style = "width: 300px; height: 300px; top: 50px; left: 50px;";
+
+            indiceFoto = (indiceFoto + 1) % Michi.fotosGato.length;
+
+            mascotaCreada = Michi;
+
+        } else if (tipoMascota == "conejo") {
+
+            const Bolita = new Conejo(Nombre);
+            document.getElementById("fotoMascota").src = Bolita.fotosConejo[indiceFoto];
+            document.getElementById("fotoMascota").style = "width: 220px; height: 300px; top: 50px; left: 50px;";
+
+            indiceFoto = (indiceFoto + 1) % Bolita.fotosConejo.length;
+
+            mascotaCreada = Bolita;
+
+        }
+
     }
 
-        document.getElementById("contenedorBotones").style.display = "flex";
+    // if (Nombre == "") {
+    // }
+
+    // if (tipoMascota == "") {
+    // }
+
+
+
+    ponerCosas();
+
 
 }
 
+function ponerCosas() {
+    if (mascotaCreada != null) {
+        if (datosRecogidos == false) {
+            document.getElementById("nombreMascota").innerText = Nombre;
 
-// function PonerBotones(){
-    
-//     var btnComer = document.createElement("button");
-//     btnComer.id = "btnComer";
-//     btnComer.innerHTML = "<img src='FotosAnimales/Comida.webp' style='width: 50px; height: 50px;'>";
-//     btnComer.value = "Comer";
-//     document.body.appendChild(btnComer);
+            document.getElementById("contenedor").removeChild(document.getElementById("selMascota"));
+            document.getElementById("contenedor").removeChild(document.getElementById("NombreTB"));
+            document.getElementById("contenedor").removeChild(document.getElementById("btnAceptar"));
+            datosRecogidos = true;
+        }
 
-//     var btnDormir = document.createElement("button");
-//     btnDormir.id = "btnDormir";
-//     btnDormir.innerHTML = "<img src='FotosAnimales/Dormir.jpeg' style='width: 50px; height: 50px;'>";
-//     btnDormir.value = "Dormir";
-//     document.body.appendChild(btnDormir);
+        document.getElementById("contenedorBotones").style.display = "flex";
+        for (let index = 0; index < document.getElementsByClassName("rangos").length; index++) {
+            document.getElementsByClassName("rangos")[index].style.display = "flex";
+        }
 
-//     var btnJugar = document.createElement("button");
-//     btnJugar.id = "btnJugar";
-//     btnJugar.innerHTML = "<img src='FotosAnimales/Jugar.jpeg' style='width: 50px; height: 50px;'>";
-//     btnJugar.value = "Jugar";
-//     document.getElementById("contenedor").appendChild(btnJugar);
+        ponerRangos();
 
-//     document.getElementById("btnComer").addEventListener("click", Comer);
-//     document.getElementById("btnDormir").addEventListener("click", Dormir);
-//     document.getElementById("btnJugar").addEventListener("click", Jugar);
-// }
+    }
+}
+
+function ponerRangos() {
+    document.getElementById("rangoHambre").value = mascotaCreada.hambre;
+    document.getElementById("rangoSuenio").value = mascotaCreada.suenio;
+    document.getElementById("rangoFelicidad").value = mascotaCreada.felicidad;
+
+    document.getElementById("lblRangoHambre").innerText = mascotaCreada.hambre + "%";
+    document.getElementById("lblRangoSuenio").innerText = mascotaCreada.suenio + "%";
+    document.getElementById("lblRangoFelicidad").innerText = mascotaCreada.felicidad + "%";
+}

@@ -17,5 +17,9 @@ class Gato extends Mascota{
         return this.#sonido;
     }
 
+    descenderHambre(){
+        super.hambre -= 1;
+    }
+
 
 }

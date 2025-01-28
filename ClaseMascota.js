@@ -7,7 +7,7 @@ class Mascota {
     #hambre;
 
     constructor(Nombre) {
-        this.#set_nombre(Nombre);
+        this.set_nombre(Nombre);
         this.#nivel = 1;
         this.#suenio = 100;
         this.#felicidad = 100;
@@ -34,8 +34,22 @@ class Mascota {
         return this.#hambre;
     }
 
-    #set_nombre(NuevoNombre) {
+    set_nombre(NuevoNombre) {
         this.#nombre = NuevoNombre;
     }
+
+    set hambre(newHambre){
+        this.#hambre = newHambre;
+    }
+
+    set felicidad(newFelicidad){
+        this.#felicidad = newFelicidad;
+    }
+
+    set suenio(newSuenio){
+        this.#suenio = newSuenio;
+    }
+
+    
 
 }
