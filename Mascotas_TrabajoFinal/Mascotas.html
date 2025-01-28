@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascota Virtual</title>
+    <link rel="stylesheet" href="Estilos.css">
+    <script src="ClaseMascota.js"></script>
+    <script src="Clases/ClasePerro.js"></script>
+    <script src="Clases/ClaseGato.js"></script>
+    <script src="Clases/ClaseConejo.js"></script>
+    <script src="MainScriptMascotas.js"></script>
+</head>
+<body>
+
+    <div id="contenedor">
+        <input type="range" id="rango" min="0" max="100" value="50" step="1" style="color: red;">
+        <label for="fotoMascota" id="nombreMascota"></label>
+        <img id="fotoMascota" src="" alt="">
+        <div id="contenedorBotones">
+            <button id="botonComer" class="botonAccion" alt="Comer"><img src='FotosAnimales/Comida.webp' style='width: 50px; height: 50px;'></button>
+            <button id="botonJugar" class="botonAccion" alt="Jugar"><img src='FotosAnimales/Jugar.jpeg' style='width: 50px; height: 50px;'></button>
+            <button id="botonDormir" class="botonAccion" alt="Dormir"><img src='FotosAnimales/Dormir.jpeg' style='width: 50px; height: 50px;'></button>
+        </div>
+    </div>
+
+</body>
+</html>

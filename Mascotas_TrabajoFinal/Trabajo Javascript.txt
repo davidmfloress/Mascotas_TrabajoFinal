@@ -1,0 +1,11 @@
+Simulador de Mascotas Virtuales
+Descripción: Un juego donde puedes adoptar y cuidar diferentes tipos de mascotas virtuales.
+Clases y herencia:
+Clase Mascota con propiedades como nombre, edad, hambre, y felicidad.
+Clase Perro y Gato que extienden de Mascota, añadiendo métodos como ladrar o maullar.
+Métodos para alimentar, jugar y cuidar a la mascota.
+Características:
+Crear una mascota y cuidar de ella.
+Interactuar con la mascota mediante botones (e.g., alimentar, jugar).
+Barra de estado para mostrar el hambre o felicidad.
+Tecnologías sugeridas: HTML, CSS, JavaScript
