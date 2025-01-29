@@ -41,17 +41,17 @@ window.onload = function () {
     // setInterval(ponerMascota, 500);
     document.getElementById("btnAceptar").addEventListener("click", ponerMascota);
     document.getElementById("btnAceptar").addEventListener("click", function () { setInterval(ponerMascota, 500) });
-    document.getElementById("btnAceptar").addEventListener("click", function(){ 
-        if(tipoMascota == "perro"){
+    document.getElementById("btnAceptar").addEventListener("click", function () {
+        if (tipoMascota == "perro") {
             setInterval(quitarHambre, 1500);
             setInterval(quitarSuenio, 2500);
             setInterval(quitarFelicidad, 2000);
-        } else if(tipoMascota == "gato"){
-            setInterval(quitarHambre, 2000) 
+        } else if (tipoMascota == "gato") {
+            setInterval(quitarHambre, 2000)
             setInterval(quitarSuenio, 2500);
             setInterval(quitarFelicidad, 1500);
-        } else if(tipoMascota == "conejo"){
-            setInterval(quitarHambre, 2000) 
+        } else if (tipoMascota == "conejo") {
+            setInterval(quitarHambre, 2000)
             setInterval(quitarSuenio, 1500);
             setInterval(quitarFelicidad, 2500);
         }
@@ -65,7 +65,15 @@ window.onload = function () {
 
 
     var btnJugar = document.getElementById("botonJugar");
+    var btnDormir = document.getElementById("botonDormir");
+    var btnComer = document.getElementById("botonComer");
+
+    btnDormir.addEventListener("click", ponerSuenio);
+    btnComer.addEventListener("click", ponerHambre);
+
+    btnJugar.addEventListener("click", ponerFelicidad);
     btnJugar.addEventListener("click", quitarHambre);
+    btnJugar.addEventListener("click", quitarSuenio);
 
 }
 
@@ -77,25 +85,58 @@ function quitarHambre() {
     }
 }
 
-function quitarSuenio(){
+function ponerHambre() {
+    if (mascotaCreada != null) {
+        mascotaCreada.subirHambre();
+        ponerRangos();
+    }
+}
+
+
+
+
+function quitarSuenio() {
     if (mascotaCreada != null) {
         mascotaCreada.descenderSuenio();
         ponerRangos();
     }
 }
 
-function quitarFelicidad(){
-    if(mascotaCreada != null){
+function ponerSuenio() {
+    if (mascotaCreada != null) {
+        mascotaCreada.subirSuenio();
+        ponerRangos();
+    }
+}
+
+
+
+
+
+function quitarFelicidad() {
+    if (mascotaCreada != null) {
         mascotaCreada.descenderFelicidad();
         ponerRangos();
     }
 }
 
+function ponerFelicidad() {
+    if (mascotaCreada != null) {
+        mascotaCreada.subirFelicidad();
+        ponerRangos();
+    }
+}
+
+
+
+
+
+
 function ponerMascota() {
-    
+
     if (mascotaCreada != null) { // Si ya se ha creado una mascota, no se puede crear otra
         // ya hay mascota creada
-        
+
         // hacemos que se vaya moviendo la foto
         if (tipoMascota == "perro") {
             document.getElementById("fotoMascota").src = mascotaCreada.fotosPerro[indiceFoto];
@@ -107,10 +148,10 @@ function ponerMascota() {
             document.getElementById("fotoMascota").src = mascotaCreada.fotosConejo[indiceFoto];
             indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosConejo.length;
         }
-        
-        
-        
-        
+
+
+
+
     } else {
 
 
@@ -194,4 +235,14 @@ function ponerRangos() {
     document.getElementById("lblRangoHambre").innerText = mascotaCreada.hambre + "%";
     document.getElementById("lblRangoSuenio").innerText = mascotaCreada.suenio + "%";
     document.getElementById("lblRangoFelicidad").innerText = mascotaCreada.felicidad + "%";
+
+    if(mascotaCreada.hambre < 75 && mascotaCreada.hambre > 50){
+        document.getElementById("fotoMascota").style.width = "230px";
+    }else if(mascotaCreada.hambre <= 50 && mascotaCreada.hambre > 25){
+        document.getElementById("fotoMascota").style.width = "190px";
+    }else if(mascotaCreada.hambre <= 25){
+        document.getElementById("fotoMascota").style.width = "150px";
+    }else{
+        document.getElementById("fotoMascota").style.width = "300px";
+    }
 }
