@@ -48,8 +48,12 @@ window.onload = function () {
             setInterval(quitarFelicidad, 2000);
         } else if(tipoMascota == "gato"){
             setInterval(quitarHambre, 2000) 
+            setInterval(quitarSuenio, 2500);
+            setInterval(quitarFelicidad, 1500);
         } else if(tipoMascota == "conejo"){
-            setInterval(quitarHambre, 1500) 
+            setInterval(quitarHambre, 2000) 
+            setInterval(quitarSuenio, 1500);
+            setInterval(quitarFelicidad, 2500);
         }
     });
     // document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
