@@ -23,5 +23,17 @@ class Gato extends Mascota{
         }
     }
 
+    descenderSuenio(){
+        if(super.suenio > 0){
+             super.suenio -= 1;
+        }
+    }
+
+    descenderFelicidad(){
+        if(super.felicidad > 0){
+             super.felicidad -= 1;
+        }
+    }
+
 
 }

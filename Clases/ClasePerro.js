@@ -16,4 +16,22 @@ class Perro extends Mascota {
     get sonido() {
         return this.#sonido;
     }
+
+    descenderHambre(){
+        if(super.hambre > 0){
+             super.hambre -= 1;
+        }
+    }
+
+    descenderSuenio(){
+        if(super.suenio > 0){
+             super.suenio -= 1;
+        }
+    }
+
+    descenderFelicidad(){
+        if(super.felicidad > 0){
+             super.felicidad -= 1;
+        }
+    }
 }

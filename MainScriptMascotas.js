@@ -41,7 +41,17 @@ window.onload = function () {
     // setInterval(ponerMascota, 500);
     document.getElementById("btnAceptar").addEventListener("click", ponerMascota);
     document.getElementById("btnAceptar").addEventListener("click", function () { setInterval(ponerMascota, 500) });
-    document.getElementById("btnAceptar").addEventListener("click", function(){ setInterval(quitarHambre, 2500) });
+    document.getElementById("btnAceptar").addEventListener("click", function(){ 
+        if(tipoMascota == "perro"){
+            setInterval(quitarHambre, 1500);
+            setInterval(quitarSuenio, 2500);
+            setInterval(quitarFelicidad, 2000);
+        } else if(tipoMascota == "gato"){
+            setInterval(quitarHambre, 2000) 
+        } else if(tipoMascota == "conejo"){
+            setInterval(quitarHambre, 1500) 
+        }
+    });
     // document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
 
 
@@ -63,6 +73,20 @@ function quitarHambre() {
     }
 }
 
+function quitarSuenio(){
+    if (mascotaCreada != null) {
+        mascotaCreada.descenderSuenio();
+        ponerRangos();
+    }
+}
+
+function quitarFelicidad(){
+    if(mascotaCreada != null){
+        mascotaCreada.descenderFelicidad();
+        ponerRangos();
+    }
+}
+
 function ponerMascota() {
     
     if (mascotaCreada != null) { // Si ya se ha creado una mascota, no se puede crear otra
@@ -76,7 +100,7 @@ function ponerMascota() {
             document.getElementById("fotoMascota").src = mascotaCreada.fotosGato[indiceFoto];
             indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosGato.length;
         } else if (tipoMascota == "conejo") {
-            document.getElementById("fotoMascota").src = Bolita.fotosConejo[indiceFoto];
+            document.getElementById("fotoMascota").src = mascotaCreada.fotosConejo[indiceFoto];
             indiceFoto = (indiceFoto + 1) % mascotaCreada.fotosConejo.length;
         }
         
