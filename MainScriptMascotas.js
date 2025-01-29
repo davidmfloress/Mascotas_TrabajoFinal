@@ -41,7 +41,7 @@ window.onload = function () {
     // setInterval(ponerMascota, 500);
     document.getElementById("btnAceptar").addEventListener("click", ponerMascota);
     document.getElementById("btnAceptar").addEventListener("click", function () { setInterval(ponerMascota, 500) });
-    document.getElementById("btnAceptar").addEventListener("click", function(){ setInterval(quitarHambre, 2000) });
+    document.getElementById("btnAceptar").addEventListener("click", function(){ setInterval(quitarHambre, 2500) });
     // document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
 
 

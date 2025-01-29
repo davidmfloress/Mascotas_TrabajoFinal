@@ -18,7 +18,9 @@ class Gato extends Mascota{
     }
 
     descenderHambre(){
-        super.hambre -= 1;
+        if(super.hambre > 0){
+             super.hambre -= 1;
+        }
     }
 
 
