@@ -1,7 +1,10 @@
-var indiceFoto = 0, Nombre = "", tipoMascota = "", datosRecogidos = false, mascotaCreada = null;
+var indiceFoto = 0, Nombre = "", tipoMascota = "", datosRecogidos = false, mascotaCreada = null, intervalHambre, intervalSuenio, intervalFelicidad, intervalPonerMascota;
 window.onload = function () {
+
+    // creamos el select de las opciones de mascota a elegir
     var selMascota = document.createElement("select");
     selMascota.id = "selMascota";
+    selMascota.style.scale = 2;
     document.getElementById("contenedor").appendChild(selMascota);
 
     var option0 = document.createElement("option");
@@ -25,45 +28,64 @@ window.onload = function () {
     selMascota.appendChild(option3);
 
 
+
+
+
+    document.getElementById("contenedor").innerHTML += "<br>";
+    document.getElementById("contenedor").innerHTML += "<br>";
+
+
+
+    // creamos el input para el nombre de la mascota
     var NombreTB = document.createElement("input");
     NombreTB.type = "text";
     NombreTB.id = "NombreTB";
     NombreTB.placeholder = "Nombre de la mascota";
+    NombreTB.style.scale = 2;
     document.getElementById("contenedor").appendChild(NombreTB);
 
+
+    document.getElementById("contenedor").innerHTML += "<br>";
+    document.getElementById("contenedor").innerHTML += "<br>";
+
+
+
+    // creamos el boton de aceptar
     var btnAceptar = document.createElement("input");
     btnAceptar.id = "btnAceptar";
     btnAceptar.type = "button";
     btnAceptar.value = "Aceptar";
+    btnAceptar.style.scale = 2;
     document.getElementById("contenedor").appendChild(btnAceptar);
 
 
-    // setInterval(ponerMascota, 500);
+
+    // ponemos en marcha todos los eventos para que vayan bajando solas las necesidades y se vaya moviendo la imagen de la mascota y parezca que se mueva
     document.getElementById("btnAceptar").addEventListener("click", ponerMascota);
-    document.getElementById("btnAceptar").addEventListener("click", function () { setInterval(ponerMascota, 500) });
+    document.getElementById("btnAceptar").addEventListener("click", function () { intervalPonerMascota = setInterval(ponerMascota, 500) });
     document.getElementById("btnAceptar").addEventListener("click", function () {
+        // esto ajusta el tiempo de bajada de las necesidades dependiendo del tipo de mascota
         if (tipoMascota == "perro") {
-            setInterval(quitarHambre, 1500);
-            setInterval(quitarSuenio, 2500);
-            setInterval(quitarFelicidad, 2000);
+            intervalHambre = setInterval(quitarHambre, 1500);
+            intervalSuenio = setInterval(quitarSuenio, 2500);
+            intervalFelicidad = setInterval(quitarFelicidad, 2000);
         } else if (tipoMascota == "gato") {
-            setInterval(quitarHambre, 2000)
-            setInterval(quitarSuenio, 2500);
-            setInterval(quitarFelicidad, 1500);
+            intervalHambre = setInterval(quitarHambre, 2000)
+            intervalSuenio = setInterval(quitarSuenio, 2500);
+            intervalFelicidad = setInterval(quitarFelicidad, 1500);
         } else if (tipoMascota == "conejo") {
-            setInterval(quitarHambre, 2000)
-            setInterval(quitarSuenio, 1500);
-            setInterval(quitarFelicidad, 2500);
+            intervalHambre = setInterval(quitarHambre, 2000)
+            intervalSuenio = setInterval(quitarSuenio, 1500);
+            intervalFelicidad = setInterval(quitarFelicidad, 2500);
         }
     });
-    // document.getElementById("btnAceptar").addEventListener("click", PonerBotones);
 
 
 
 
 
 
-
+    // creamos los botones de las acciones
     var btnJugar = document.getElementById("botonJugar");
     var btnDormir = document.getElementById("botonDormir");
     var btnComer = document.getElementById("botonComer");
@@ -77,7 +99,7 @@ window.onload = function () {
 
 }
 
-
+// quita hambre
 function quitarHambre() {
     if (mascotaCreada != null) {
         mascotaCreada.descenderHambre();
@@ -85,6 +107,7 @@ function quitarHambre() {
     }
 }
 
+// pone hambre
 function ponerHambre() {
     if (mascotaCreada != null) {
         mascotaCreada.subirHambre();
@@ -94,7 +117,7 @@ function ponerHambre() {
 
 
 
-
+// quita sueño
 function quitarSuenio() {
     if (mascotaCreada != null) {
         mascotaCreada.descenderSuenio();
@@ -102,6 +125,7 @@ function quitarSuenio() {
     }
 }
 
+// pone sueño
 function ponerSuenio() {
     if (mascotaCreada != null) {
         mascotaCreada.subirSuenio();
@@ -112,7 +136,7 @@ function ponerSuenio() {
 
 
 
-
+// quitamos felicidad
 function quitarFelicidad() {
     if (mascotaCreada != null) {
         mascotaCreada.descenderFelicidad();
@@ -120,6 +144,7 @@ function quitarFelicidad() {
     }
 }
 
+// ponemos felicidad
 function ponerFelicidad() {
     if (mascotaCreada != null) {
         mascotaCreada.subirFelicidad();
@@ -131,7 +156,7 @@ function ponerFelicidad() {
 
 
 
-
+// funcion que crea la mascota
 function ponerMascota() {
 
     if (mascotaCreada != null) { // Si ya se ha creado una mascota, no se puede crear otra
@@ -154,7 +179,9 @@ function ponerMascota() {
 
     } else {
 
-
+        // guardamos los datos en vairables porque como se ejecuta la función cada x tiempo para ir moviendo
+        // la imagen de la mascota, si no guardamos los datos en variables, da error porque de don de se recoje
+        // fue creado en timpo de ejecución
         Nombre = document.getElementById("NombreTB").value;
         tipoMascota = document.getElementById("selMascota").value;
         // creamos la mascota
@@ -165,7 +192,7 @@ function ponerMascota() {
             document.getElementById("fotoMascota").src = Bartolo.fotosPerro[indiceFoto];
             document.getElementById("fotoMascota").style = "width: 230px; height: 300px; top: 50px; left: 50px;";
 
-            // indiceFoto = (indiceFoto + 1) % Bartolo.fotosPerro.length;
+            indiceFoto = (indiceFoto + 1) % Bartolo.fotosPerro.length;
 
             mascotaCreada = Bartolo;
 
@@ -193,14 +220,7 @@ function ponerMascota() {
 
     }
 
-    // if (Nombre == "") {
-    // }
-
-    // if (tipoMascota == "") {
-    // }
-
-
-
+    // llamamos al método para poner las cosas en pantalla
     ponerCosas();
 
 
@@ -209,6 +229,7 @@ function ponerMascota() {
 function ponerCosas() {
     if (mascotaCreada != null) {
         if (datosRecogidos == false) {
+            // borramos los elementos que ya no necesitamos
             document.getElementById("nombreMascota").innerText = Nombre;
 
             document.getElementById("contenedor").removeChild(document.getElementById("selMascota"));
@@ -236,13 +257,45 @@ function ponerRangos() {
     document.getElementById("lblRangoSuenio").innerText = mascotaCreada.suenio + "%";
     document.getElementById("lblRangoFelicidad").innerText = mascotaCreada.felicidad + "%";
 
-    if(mascotaCreada.hambre < 75 && mascotaCreada.hambre > 50){
-        document.getElementById("fotoMascota").style.width = "230px";
-    }else if(mascotaCreada.hambre <= 50 && mascotaCreada.hambre > 25){
-        document.getElementById("fotoMascota").style.width = "190px";
-    }else if(mascotaCreada.hambre <= 25){
+    if (mascotaCreada.hambre == 0) {
+        document.getElementById("fotoMascota").src = "FotosAnimales/FotoMuerto.png";
+        document.getElementById("fotoMascota").style.width = "200px";
+        empezarDeNuevo();
+    } else if (mascotaCreada.hambre <= 25) {
         document.getElementById("fotoMascota").style.width = "150px";
-    }else{
+    } else if (mascotaCreada.hambre <= 50) {
+        document.getElementById("fotoMascota").style.width = "190px";
+    } else if (mascotaCreada.hambre < 75) {
+        document.getElementById("fotoMascota").style.width = "230px";
+    } else {
         document.getElementById("fotoMascota").style.width = "300px";
     }
+}
+
+function empezarDeNuevo(){
+
+    // paramos todos los intervalitos para que no se ralle
+    clearInterval(intervalPonerMascota);
+    clearInterval(intervalHambre);
+    clearInterval(intervalSuenio);
+    clearInterval(intervalFelicidad);
+
+    var startAgain = document.createElement("input");
+    startAgain.type = "button";
+    startAgain.id = "starAgain";
+    startAgain.value = "Empezar de nuevo";
+    startAgain.onclick = function(){
+        location.reload();
+    }
+
+    var info = document.createElement("label");
+    info.innerHTML = "Has perdido, se te ha muerto " + Nombre + ". <br> Haz click en el botón para empezar de nuevo <br> <br>";
+
+    document.getElementById("contenedorBotones").innerHTML = "";
+    document.getElementById("contenedorBotones").appendChild(info);
+    document.getElementById("contenedorBotones").innerHTML += "<br>";
+    document.getElementById("contenedorBotones").appendChild(startAgain);
+
+    document.body.style.background = "grey";
+
 }
