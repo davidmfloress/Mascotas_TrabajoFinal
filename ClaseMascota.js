@@ -1,14 +1,12 @@
 class Mascota {
 
     #nombre;
-    #nivel;
     #suenio;
     #felicidad;
     #hambre;
 
     constructor(Nombre) {
         this.set_nombre(Nombre);
-        this.#nivel = 1;
         this.#suenio = 100;
         this.#felicidad = 100;
         this.#hambre = 100;
@@ -16,10 +14,6 @@ class Mascota {
 
     get nombre() {
         return this.#nombre;
-    }
-
-    get nivel() {
-        return this.#nivel;
     }
 
     get suenio() {

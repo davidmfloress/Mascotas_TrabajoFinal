@@ -65,19 +65,11 @@ window.onload = function () {
     document.getElementById("btnAceptar").addEventListener("click", function () { intervalPonerMascota = setInterval(ponerMascota, 500) });
     document.getElementById("btnAceptar").addEventListener("click", function () {
         // esto ajusta el tiempo de bajada de las necesidades dependiendo del tipo de mascota
-        if (tipoMascota == "perro") {
             intervalHambre = setInterval(quitarHambre, 1500);
-            intervalSuenio = setInterval(quitarSuenio, 2500);
-            intervalFelicidad = setInterval(quitarFelicidad, 2000);
-        } else if (tipoMascota == "gato") {
-            intervalHambre = setInterval(quitarHambre, 2000)
-            intervalSuenio = setInterval(quitarSuenio, 2500);
-            intervalFelicidad = setInterval(quitarFelicidad, 1500);
-        } else if (tipoMascota == "conejo") {
-            intervalHambre = setInterval(quitarHambre, 2000)
-            intervalSuenio = setInterval(quitarSuenio, 1500);
-            intervalFelicidad = setInterval(quitarFelicidad, 2500);
-        }
+            // ! tengo que cambiar los metodos
+            intervalSuenio = setInterval(quitarSuenio, 1501);
+            intervalFelicidad = setInterval(quitarFelicidad, 1502);
+            
     });
 
 

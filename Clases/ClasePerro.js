@@ -17,33 +17,42 @@ class Perro extends Mascota {
         return this.#sonido;
     }
 
-    descenderHambre(){
-        if(super.hambre > 0){
-             super.hambre -= 1;
+    descenderHambre() {
+        if (super.hambre > 0) {
+            if (super.hambre - 7 < 0) {
+                super.hambre = 0;
+            } else {
+                super.hambre -= 7;
+
+            }
         }
     }
 
-    subirHambre(){
-        if(super.hambre < 100 ){
-            if((super.hambre) + 10 > 100){
+    subirHambre() {
+        if (super.hambre < 100) {
+            if ((super.hambre) + 10 > 100) {
                 super.hambre = 100;
-            }else{
+            } else {
                 super.hambre += 10;
             }
         }
     }
 
 
-    descenderSuenio(){
-        if(super.suenio > 0){
-             super.suenio -= 1;
-        }
-    }
 
-    descenderFelicidad(){
-        if(super.felicidad > 0){
-             super.felicidad -= 1;
+
+    
+
+    descenderSuenio() {
+        if (super.suenio > 0) {
+            if (super.suenio - 2 < 0) {
+                super.suenio = 0;
+            } else {
+                super.suenio -= 2;
+
+            }
         }
+
     }
 
     subirSuenio() {
@@ -55,7 +64,25 @@ class Perro extends Mascota {
             }
         }
     }
-    
+
+
+
+
+
+
+
+    descenderFelicidad() {
+        if (super.felicidad > 0) {
+            if (super.felicidad - 4 < 0) {
+                super.felicidad = 0;
+            } else {
+                super.felicidad -= 4;
+
+            }
+        }
+    }
+
+
     subirFelicidad() {
         if (super.felicidad < 100) {
             if ((super.felicidad) + 10 > 100) {

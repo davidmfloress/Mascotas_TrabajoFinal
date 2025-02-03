@@ -18,8 +18,13 @@ class Gato extends Mascota{
     }
 
     descenderHambre(){
-        if(super.hambre > 0){
-             super.hambre -= 1;
+        if (super.hambre > 0) {
+            if (super.hambre - 4 < 0) {
+                super.hambre = 0;
+            } else {
+                super.hambre -= 4;
+
+            }
         }
     }
 
@@ -34,17 +39,17 @@ class Gato extends Mascota{
     }
 
     descenderSuenio(){
-        if(super.suenio > 0){
-             super.suenio -= 1;
+        if (super.suenio > 0) {
+            if (super.suenio - 2 < 0) {
+                super.suenio = 0;
+            } else {
+                super.suenio -= 2;
+
+            }
         }
     }
 
-    descenderFelicidad(){
-        if(super.felicidad > 0){
-             super.felicidad -= 1;
-        }
-    }
-
+    
     subirSuenio() {
         if (super.suenio < 100) {
             if ((super.suenio) + 10 > 100) {
@@ -55,6 +60,16 @@ class Gato extends Mascota{
         }
     }
     
+    descenderFelicidad(){
+        if (super.felicidad > 0) {
+            if (super.felicidad - 7 < 0) {
+                super.felicidad = 0;
+            } else {
+                super.felicidad -= 7;
+
+            }
+        }
+    }
     subirFelicidad() {
         if (super.felicidad < 100) {
             if ((super.felicidad) + 10 > 100) {
